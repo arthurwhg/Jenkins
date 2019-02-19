@@ -11,9 +11,9 @@ pipeline {
     	   		}	
             steps {
                 sh '''
-		    			touch /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
-                    ls -lah > /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
-                    echo "Hello World! " ${DIR} >> /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
+                		touch /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
+                    	ls -lah > /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
+                    	echo "Hello World! " ${DIR} >> /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
                 '''
             }
         }
