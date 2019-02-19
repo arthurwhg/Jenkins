@@ -2,14 +2,15 @@ pipeline {
     agent any
     stages {
         stage('Build') {
+           input {
+             	message "Folder Name:"
+               	ok "Done"
+                parameters {
+       	            string(name: 'DIR', defaultValue: 'abc', description: 'Folder name')
+               	}
+    	   }	
+		sh 'echo "Hello World"'
             steps {
-                input {
-                	message "Folder Name:"
-                	ok "Done"
-	                parameters {
-        	            string(name: 'DIR', defaultValue: 'abc', description: 'Folder name')
-                	}
-            	}	
 		sh 'echo "Hello World"'
                 sh '''
                     echo "Multiline shell steps works too"
