@@ -9,7 +9,6 @@ pipeline {
        	            string(name: 'DIR', defaultValue: 'abc', description: 'Folder name')
                	}
     	   }	
-		sh 'echo "Hello World"'
             steps {
 		sh 'echo "Hello World"'
                 sh '''
