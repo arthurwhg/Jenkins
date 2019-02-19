@@ -8,11 +8,11 @@ pipeline {
                 parameters {
        	            string(name: 'DIR', defaultValue: 'abc', description: 'Folder name')
                	}
-    	   }	
+    	   		}	
             steps {
-		sh 'echo "Hello World" ${DIR}'
+				sh 'echo "Hello World! " ${DIR} '
                 sh '''
-		    touch /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
+		    			touch /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
                     ls -lah > /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
                 '''
             }
