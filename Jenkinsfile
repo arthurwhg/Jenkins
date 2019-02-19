@@ -1,10 +1,20 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
+        stage('Build') {
+           input {
+             	message "Folder Name:"
+               	ok "Done"
+                parameters {
+       	            string(name: 'DIR', defaultValue: 'abc', description: 'Folder name')
+               	}
+    	   		}	
             steps {
-		echo 'Python ...'
-                sh 'python --version'
+				sh 'echo "Hello World! " ${DIR} '
+                sh '''
+		    			touch /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
+                    ls -lah > /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
+                '''
             }
         }
     }
