@@ -10,7 +10,7 @@ pipeline {
                	}
     	   }	
             steps {
-		sh 'echo "Hello World"'
+		sh 'echo "Hello World" ${DIR}'
                 sh '''
                     echo "Multiline shell steps works too"
 		    touch /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
