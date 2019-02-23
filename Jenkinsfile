@@ -1,43 +1,43 @@
 pipeline {
-    agent any
-    stages {
-	stage('Initiate'){
-	   steps {
-		sh 'echo "Start to build server on "'
-	   }
-	}
-        stage('Plan') {
-           input {
-             	message "Approval:"
-               	ok "Approved"
-                parameters {
-       	            string(name: 'DIR', defaultValue: 'Approved', description: 'Approved comments')
-               	}
-    	   }	
-           steps {
-                sh '''
+  agent any
+  stages {
+    stage('Initiate') {
+      steps {
+        sh 'echo "Start to build server on "'
+      }
+    }
+    stage('Plan') {
+      input {
+        message 'Approval:'
+        id 'Approved'
+        parameters {
+          string(name: 'DIR', defaultValue: 'Approved', description: 'Approved comments')
+        }
+      }
+      steps {
+        sh '''
 			cd "/Users/artwang2/Documents/My Jar/terraform-provider-aws/examples/two-tier"
 			echo ${DIR} > ./approved 
 			terraform init -input=false >./build.log
 			terraform plan -input=false >> ./build.log               	
                 '''
-            }
-        }
-	stage('Build') {
-	  steps {
-		sh '''
+      }
+    }
+    stage('Build') {
+      steps {
+        sh '''
 			cd "/Users/artwang2/Documents/My Jar/terraform-provider-aws/examples/two-tier"
-			terraform apply -input=false >> ./build.log
+			terraform apply plan -out=plan -input=false >> ./build.log
 		'''
-	  }
-	}
-	stage('Done') {
-	  steps {
-               sh '''
+      }
+    }
+    stage('Done') {
+      steps {
+        sh '''
                         cd "/Users/artwang2/Documents/My Jar/terraform-provider-aws/examples/two-tier"
                         terraform show
                '''
-	  }
-	}
+      }
     }
+  }
 }
