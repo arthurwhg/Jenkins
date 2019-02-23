@@ -1,21 +1,43 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+	stage('Initiate'){
+	   steps {
+		sh 'echo "Start to build server on "'
+	   }
+	}
+        stage('Plan') {
            input {
-             	message "Folder Name:"
-               	ok "Done"
+             	message "Approval:"
+               	ok "Approved"
                 parameters {
-       	            string(name: 'DIR', defaultValue: 'abc', description: 'Folder name')
+       	            string(name: 'DIR', defaultValue: 'Approved', description: 'Approved comments')
                	}
-    	   		}	
-            steps {
+    	   }	
+           steps {
                 sh '''
-                		touch /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
-                    	ls -lah > /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
-                    	echo "Hello World! " ${DIR} >> /Users/artwang2/Documents/GitHub/Jenkins/${DIR}
+			cd "/Users/artwang2/Documents/My Jar/terraform-provider-aws/examples/two-tier"
+			echo ${DIR} > ./approved 
+			terraform init -input=false >./build.log
+			terraform plan -input=false >> ./build.log               	
                 '''
             }
         }
+	stage('Build') {
+	  steps {
+		sh '''
+			cd "/Users/artwang2/Documents/My Jar/terraform-provider-aws/examples/two-tier"
+			terraform apply -input=false >> ./build.log
+		'''
+	  }
+	}
+	stage('Done') {
+	  steps {
+               sh '''
+                        cd "/Users/artwang2/Documents/My Jar/terraform-provider-aws/examples/two-tier"
+                        terraform show
+               '''
+	  }
+	}
     }
 }
