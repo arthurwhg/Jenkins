@@ -27,7 +27,7 @@ pipeline {
       steps {
         sh '''
 			cd "/Users/artwang2/Documents/My Jar/terraform-provider-aws/examples/two-tier"
-			terraform apply plan -out=plan -input=false >> ./build.log
+			terraform apply plan -input=false >> ./build.log
 		'''
       }
     }
