@@ -1,0 +1,7 @@
+total 16
+drwxr-xr-x   5 artwang2  staff   160B Feb 24 00:44 .
+drwxr-xr-x  21 artwang2  staff   672B Feb 23 02:45 ..
+drwxr-xr-x  14 artwang2  staff   448B Feb 24 00:44 .git
+-rw-r--r--   1 artwang2  staff   200B Feb 22 23:46 .project
+-rw-r--r--   1 artwang2  staff   646B Feb 24 00:44 Jenkinsfile
+Hello World!  abc1
